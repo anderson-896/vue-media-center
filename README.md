@@ -1,4 +1,4 @@
-# my-home
+# vue-media-center
 
 > A Vue.js project
 
