@@ -53,19 +53,12 @@
                     </vue-tiny-slider>
                 </div>
                 <div class="line-slider">
-                    <label>C</label>
-                    <vue-tiny-slider ref="sl2" class="row-slid-item"  v-bind="lineOptions">
-                        <div class="slid-item">CHome</div>
-                        <div class="slid-item">CNewTeste </div>
-                        <div class="slid-item">CAbssi</div>
-                    </vue-tiny-slider>
-                </div>
-                <div class="line-slider">
                     <label>D</label>
-                    <vue-tiny-slider ref="sl3" class="row-slid-item" v-bind="lineOptions">
-                        <div class="slid-item">DOpt1</div>
-                        <div class="slid-item">DA new Teste </div>
-                        <div class="slid-item">D123</div>
+                    <vue-tiny-slider ref="sl2" class="row-slid-item"  v-bind="lineOptions">
+                        <div class="slid-item">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWkAy8kim4jNhyrSAvZb6vb5eq7R33I8SJTt6nTPh3wOWN83PI" height="75px" alt="">
+                            
+                        </div>
                     </vue-tiny-slider>
                 </div>
                 <div class="line-slider">
@@ -79,6 +72,7 @@
                         </div>
                         <div class="slid-item">
                             <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-dock-icon-set--icons-by-dakirby/512/Netflix.png" height="75px" alt="">
+                            
                         </div>
                         <div class="slid-item">DA new Teste </div>
                         <div class="slid-item">D123</div>
@@ -137,10 +131,16 @@ export default {
             if(e.key === 'ArrowUp') {
                 this.resetAll();
                 this.$refs.mainSlider.slider.goTo('prev');
+                if(this.$refs.mainSlider.slider.getInfo().index === 0) {
+                    this.$refs.mainSlider.slider.goTo('prev');
+                }
             }
             else if(e.key === 'ArrowDown') {
                 this.resetAll();
-                this.$refs.mainSlider.slider.goTo('next');                
+                this.$refs.mainSlider.slider.goTo('next');
+                if(this.$refs.mainSlider.slider.getInfo().index === 0) {
+                    this.$refs.mainSlider.slider.goTo('next');
+                }              
             }
             else if(e.key === 'ArrowLeft') {
                 this.$refs.mainSlider.$children[activeIndex].slider.goTo('prev');
@@ -153,9 +153,7 @@ export default {
                 console.log(this.$refs.mainSlider.$children[activeIndex].$el)
                 this.$refs.mainSlider.$children[activeIndex].$el.click();
             }
-            if(this.$refs.mainSlider.slider.getInfo().index === 0) {
-                this.$refs.mainSlider.slider.goTo(1);
-            }
+            
             // this.$refs.mainSlider.slider.updateSliderHeight();
             console.dir(this.$refs.mainSlider.slider)
         },
@@ -190,7 +188,7 @@ export default {
     }
 
     .title {
-        margin-left: -2.5vw;
+        /* margin-left: -60; */
         color: #84b3d4;
     }
     
@@ -226,10 +224,12 @@ export default {
     .line-slider {
         width: 100px;
         margin-left: 20vw;
+        text-align: left;
     }
 
     .row-slider {
         height: 30vh;
+        margin-top: -15vh;
     }
     
     .slid-item {
@@ -275,12 +275,13 @@ export default {
 
     .line-slider.tns-slide-active .slid-item.tns-slide-active{
         transition: transform .3s ease-out;
-        transform: scale(1.5) translateY(-15%) translateX(10%);
+        transform: scale(1.5) translateY(0) translateX(10%);
         /* padding: 1vw 9vw 1px 0; */
         border: 1px solid #84b3d4;
         border-radius: 3px;
         padding: .5vw;
-        margin: 4vw 9vw 1px 0;
+        /* margin: 60% 9vw 1px 0; */
+        margin-right: 7vw;
         display: inline-flex;
     }
 
