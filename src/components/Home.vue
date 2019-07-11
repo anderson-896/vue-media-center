@@ -4,7 +4,7 @@
             <vue-tiny-slider v-bind="rowOptions" ref="mainSlider" :on-init="onInit" >
                 <div class="line-slider">
                     <vue-tiny-slider class="row-slid-item"  v-bind="lineOptions">
-                        <div class="slid-item">
+                        <div class="slid-item title">
                             <svg viewBox="64 64 896 896" data-icon="mobile" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M744 62H280c-35.3 0-64 28.7-64 64v768c0 35.3 28.7 64 64 64h464c35.3 0 64-28.7 64-64V126c0-35.3-28.7-64-64-64zm-8 824H288V134h448v752zM472 784a40 40 0 1 0 80 0 40 40 0 1 0-80 0z"></path></svg>
                             My Phone
                         </div>
@@ -64,6 +64,22 @@
                     <label>D</label>
                     <vue-tiny-slider ref="sl3" class="row-slid-item" v-bind="lineOptions">
                         <div class="slid-item">DOpt1</div>
+                        <div class="slid-item">DA new Teste </div>
+                        <div class="slid-item">D123</div>
+                    </vue-tiny-slider>
+                </div>
+                <div class="line-slider">
+                    <label>N</label>
+                    <vue-tiny-slider ref="sl3" class="row-slid-item" v-bind="lineOptions">
+                        <div class="slid-item">
+                            <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-dock-icon-set--icons-by-dakirby/512/Netflix.png" height="75px" alt="">
+                        </div>
+                        <div class="slid-item">
+                            <img src="https://assets0.minhaserie.com.br/uploads/editor_pictures/000/035/976/content_pic.jpg?w=700" height="75px" alt="">
+                        </div>
+                        <div class="slid-item">
+                            <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-dock-icon-set--icons-by-dakirby/512/Netflix.png" height="75px" alt="">
+                        </div>
                         <div class="slid-item">DA new Teste </div>
                         <div class="slid-item">D123</div>
                     </vue-tiny-slider>
@@ -168,10 +184,16 @@ export default {
         font-size: 3vw;
     }
 
-    .line-slider.tns-slide-active label {
-        margin-left: -90%;
+    .line-slider.tns-slide-active label, .title {
+        /* margin-left: -160%; */
         color: #84b3d4;
     }
+
+    .title {
+        margin-left: -2.5vw;
+        color: #84b3d4;
+    }
+    
 
     .item-icon {
         display: none;
@@ -179,7 +201,10 @@ export default {
     }
 
     .line-slider.tns-slide-active .slid-item.tns-slide-active .item-icon {
-        display: inline;
+        display: inline-block;
+        margin-top: 2%;
+        width: 3vw;
+        margin-right: 3%;
     }
 
     #main-stage {
@@ -210,6 +235,7 @@ export default {
     .slid-item {
         white-space: nowrap !important;
         text-align: left;
+        margin: 40px 0;
     }
 
     .item-text {
@@ -231,17 +257,33 @@ export default {
         transition: color 1.1s;
         transition: transform .35s;
         transition-delay: 0.2s;
+       
+
     }
 
     .tns-item {
-        font-size: 4.5vw;
+        font-size: 2vw;
         font-family: 'Quicksand', sans-serif;
         font-weight: 100;
         text-align: center;
-        padding: 1vw 5vw 30px 1vw;
+        padding: 1vw 5vw 1vw 1vw;
         background: transparent;
         user-select: none;
+        margin: 1vw 9vw 1px 0;
     }
+
+
+    .line-slider.tns-slide-active .slid-item.tns-slide-active{
+        transition: transform .3s ease-out;
+        transform: scale(1.5) translateY(-15%) translateX(10%);
+        /* padding: 1vw 9vw 1px 0; */
+        border: 1px solid #84b3d4;
+        border-radius: 3px;
+        padding: .5vw;
+        margin: 4vw 9vw 1px 0;
+        display: inline-flex;
+    }
+
     .tns-item div {
         white-space: nowrap;
     }
@@ -249,13 +291,11 @@ export default {
     .line-slider .tns-item {
         transition: all .3s ease-out;
     }
-    .line-slider.tns-slide-active .slid-item.tns-slide-active{
-        transition: transform .3s ease-out;
-        transform: scale(1.4) translateY(-3%) translateX(10%);
-        padding: 1vw 9vw 1px 0;
-    }
+    
 
     .line-slider:not(.tns-slide-active) .slid-item:nth-child(n+2) {
+        /* padding-top: 1vw; */
+        
         opacity: .2;
     }
     .line-slider:not(.tns-slide-active) .slid-item:nth-child(n+3) {
