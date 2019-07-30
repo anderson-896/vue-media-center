@@ -12,6 +12,9 @@
 
 import rowView from './RowView'
 export default {
+    props: {
+        skipHeader: false
+    },
     data() {
         return {
             initialized: false,
@@ -44,22 +47,21 @@ export default {
         onInit() {
             setTimeout(() => {
                 this.$refs.mainSlider.slider.goTo(1);
-            }, 1000);
+            }, 10);
         },
-        onKeyUp(e) {
-            
+        onKeyDown(e) {            
             let activeIndex = this.$refs.mainSlider.slider.getInfo().index;
             if(e.key === 'ArrowUp') {
                 this.resetAll();
                 this.$refs.mainSlider.slider.goTo('prev');
-                if(this.$refs.mainSlider.slider.getInfo().index === 0) {
+                if(this.skipHeader && this.$refs.mainSlider.slider.getInfo().index === 0) {
                     this.$refs.mainSlider.slider.goTo('prev');
                 }
             }
             else if(e.key === 'ArrowDown') {
                 this.resetAll();
                 this.$refs.mainSlider.slider.goTo('next');
-                if(this.$refs.mainSlider.slider.getInfo().index === 0) {
+                if(this.skipHeader && this.$refs.mainSlider.slider.getInfo().index === 0) {
                     this.$refs.mainSlider.slider.goTo('next');
                 }              
             }
@@ -70,12 +72,9 @@ export default {
                 this.$refs.mainSlider.$children[activeIndex].$children[0].slider.goTo('next');
             }
             else if(e.key === 'Enter') {
-                // alert('Enter ' + activeIndex + ' - ' + this.$refs.mainSlider.$children[activeIndex].slider.getInfo().index);
                 let line = this.$refs.mainSlider.$children[activeIndex].$children[0];
-                console.log(this.$refs.mainSlider.$children[activeIndex].$children[0].slider)
                 let innerActive = line.slider.getInfo().index;
-                console.log(line);
-                line.$children[innerActive].$el.click();
+                this.$refs.mainSlider.$children[activeIndex].dispatchClickOnActive();
             }
             
         },
@@ -85,13 +84,32 @@ export default {
                     sld.$children[0].slider.goTo(0);
                 }
             });
+        },
+        detectAndScroll(event) {
+            let delta;
+
+            if (event.wheelDelta){
+                delta = event.wheelDelta;
+            }else{
+                delta = -1 * event.deltaY;
+            }
+
+            if (delta < 0){
+                this.onKeyDown({key: 'ArrowDown'});
+            }else if (delta > 0){
+                this.onKeyDown({key: 'ArrowUp'});
+            }
+
         }
     },
     created() {
-      window.addEventListener('keyup', this.onKeyUp);
+      window.addEventListener('keydown', this.onKeyDown);
+      window.addEventListener('wheel', this.detectAndScroll);
+
     },
     beforeDestroy() {
-      window.removeEventListener('keyup', this.onKeyUp);
+      window.removeEventListener('keydown', this.onKeyDown);
+      window.removeEventListener('wheel', this.detectAndScroll);
     },
     components: {
         rowView

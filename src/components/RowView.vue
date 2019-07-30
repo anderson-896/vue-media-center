@@ -1,7 +1,7 @@
 <template>
     <div class="line-slider">
         <slot name="label"/>
-        <vue-tiny-slider class="row-slid-item"  v-bind="lineOptions">
+        <vue-tiny-slider ref="lineSlider" class="row-slid-item"  v-bind="lineOptions">
             <slot/>
         </vue-tiny-slider>
     </div>
@@ -22,6 +22,12 @@ export default {
                 speed: 400,
                 // arrowKeys: true,
             }
+        }
+    },
+    methods: {
+        dispatchClickOnActive() {
+            let activeIndex = this.$refs.lineSlider.slider.getInfo().index;
+            this.$refs.lineSlider.slider.getInfo().slideItems[activeIndex].click();
         }
     }
 }
