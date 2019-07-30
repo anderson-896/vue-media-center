@@ -17,18 +17,7 @@ export default {
     },
     data() {
         return {
-            initialized: false,
-            lineOptions: {                
-                mouseDrag: true,
-                controls: false,
-                // container: "#center",                
-                autoWidth: true,
-                items: 1,
-                // center: true,
-                rewind: true,
-                speed: 400,
-                // arrowKeys: true,
-            },
+            initialized: false,            
             rowOptions: {
                 mouseDrag: true,
                 // arrowKeys: true,
@@ -105,7 +94,6 @@ export default {
     created() {
       window.addEventListener('keydown', this.onKeyDown);
       window.addEventListener('wheel', this.detectAndScroll);
-
     },
     beforeDestroy() {
       window.removeEventListener('keydown', this.onKeyDown);
